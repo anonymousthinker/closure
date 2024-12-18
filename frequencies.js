@@ -30,13 +30,10 @@ const getCount = function (updatedArray, char) {
   }));
 
   if (elementFound === undefined) {
-    updatedArray.push([char, 1]);
+    return [...updatedArray, [char, 1]];
   }
 
-  if (elementFound !== undefined) {
-    elementFound[1] += 1;
-  }
-
+  elementFound[1] += 1;
   return updatedArray;
 };
 
