@@ -13,8 +13,7 @@ const hasOccured = function (array, char) {
     return array.map(countIfElementIncludes(char))
   }
 
-  array.push([char, 1])
-  return array;
+  return [...array,[char, 1]];
 }
 
 const getOccurences = function (string) {
@@ -24,7 +23,7 @@ const getOccurences = function (string) {
 }
 
 const test = function () {
-  const string = 'geek';
+  const string = 'danish bhai';
   const occurences = getOccurences(string);
   console.table(occurences());
 }

@@ -4,23 +4,34 @@ const zip = function (array1, array2) {
   });
 };
 
-const pattern = function (times) {
-  return function (symbols) { return symbols.map((c) => 
-    times.reverse().map((number) => 
-      c.repeat(number))) }
+const getLines = function (times) {
+  return function (symbols) { return symbols.map((char) => 
+    times.reverse().map(repeat(char))) }
 }
 
-const times = [1, 2, 3, 4, 5,6];
-const symbols = [' ', '*'];
+const repeat = function (char) {
+  return function (times) {
+    return char.repeat(times);
+  }
+}
 
-const lines = pattern(times)(symbols);
-const firstTriangle = zip(lines[0], lines[1]).map(function ([p1, p2]) {
-  return p1 + p2
-});
+const concatenate = function ([elementOne, elementTwo]) {
+  return elementOne + elementTwo;
+}
 
-const secondTriangle = [0, 1, 2, 3, 4, 5].map((times) => '*'.repeat(times));
+const create = function (size) {
+  const times = [1, 2, 3];
+  const symbols = [' ', '*'];
+  const lines = getLines(times)(symbols);
+  const triangle1stHalf = zip(lines[0], lines[1]).map(concatenate);
+  const triangle2ndHalf = [0, 1, 2].map(repeat('*')); 
 
-const oneHalf = zip(firstTriangle, secondTriangle).map((p) => p[0] + p[1]);
-const otherHalf = [...oneHalf].reverse();
+  const upperDiamond = zip(triangle1stHalf, triangle2ndHalf).map(concatenate);
+  const lowerDiamond = [...upperDiamond].reverse();
 
-console.log(oneHalf.join("\n") + "\n" + otherHalf.slice(1).join("\n"));
+  console.log(upperDiamond.join("\n") + "\n" + lowerDiamond.slice(1).join("\n"));
+}
+
+create(5)
+
+//-----------------------------better way---------------------------------------

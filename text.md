@@ -60,6 +60,12 @@ undefined
 [ 1, 5 ]
 ```
 
-made some change
-
-//hello world
+Instead of pushing into the array everytime 
+```
+array.push([char, count])
+return array
+```
+Just do
+```
+return [...array, [char, count]]
+```
